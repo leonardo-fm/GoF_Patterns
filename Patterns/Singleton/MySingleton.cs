@@ -12,5 +12,5 @@ public class MySingleton
         return instance;
     }
 
-    public string GetGreetings() => "Hi!";
+    public string GetGreetings() => "Hi from singleton!";
 }
