@@ -9,7 +9,6 @@ public class CarFactory
     {
         switch (carType)
         {
-
             case CarType.Racing:
                 return new RaceCar(color, hp);
             case CarType.City:

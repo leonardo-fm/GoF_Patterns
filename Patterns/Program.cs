@@ -1,11 +1,28 @@
-﻿using Factory;
+﻿using AbstractFactory.Company;
+using Factory;
+using Singleton;
 
-namespace Singleton;
+namespace ConsoleApp;
 
 class Program
 {
+    /*
+     * https://www.digitalocean.com/community/tutorials/gangs-of-four-gof-design-patterns
+     * https://www.youtube.com/@geekific
+     */
+    
     private static void Main(string[] args)
     {
+        // Abstract Factory
+        Section("Abstract Factory", () =>
+        {
+            SuperBurgerFactory superBurgerFactory = new SuperBurgerFactory();
+            FriedFatFactory friedFatFactory = new FriedFatFactory();
+            superBurgerFactory.GetFried().Cook();
+            superBurgerFactory.GetBurger().Prepare();
+            friedFatFactory.GetBurger().Prepare();
+        });
+        
         // Factory
         Section("Factory", () =>
         {
