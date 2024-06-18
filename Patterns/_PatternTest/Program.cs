@@ -2,7 +2,7 @@
 using Factory;
 using Singleton;
 
-namespace ConsoleApp;
+namespace _PatternTest;
 
 class Program
 {
@@ -45,3 +45,4 @@ class Program
         Console.WriteLine("*** Finished " + sectionName + " ***\n");
     }
 }
+
