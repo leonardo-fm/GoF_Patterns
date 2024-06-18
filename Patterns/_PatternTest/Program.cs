@@ -1,4 +1,5 @@
 ﻿using AbstractFactory.Company;
+using Builder;
 using Factory;
 using Singleton;
 
@@ -13,6 +14,19 @@ class Program
     
     private static void Main(string[] args)
     {
+        // Builder
+        Section("Builder", () =>
+        {
+            CompanyComputerDirector companyComputerDirector = new CompanyComputerDirector();
+            Console.WriteLine("Company computer:");
+            companyComputerDirector.BuildCompanyComputer().PrintComponents();
+            ComputerBuilder computerBuilder = new ComputerBuilder();
+            Console.WriteLine("-----------");
+            Console.WriteLine("My computer");
+            computerBuilder.Case("Nice 78").MotherBoard("IDK 88").SSD("Fast 2000").PowerSupply("Ok 800W").GPU("Sesam 8900").CPU("OOP 6654k");
+            computerBuilder.Build().PrintComponents();
+        });
+        
         // Abstract Factory
         Section("Abstract Factory", () =>
         {
