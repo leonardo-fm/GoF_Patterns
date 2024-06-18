@@ -1,6 +1,7 @@
 ﻿using AbstractFactory.Company;
 using Builder;
 using Factory;
+using Prototype;
 using Singleton;
 
 namespace _PatternTest;
@@ -14,6 +15,35 @@ class Program
     
     private static void Main(string[] args)
     {
+        Section("Creational Design Patterns", CreationalDesignPatterns);
+    }
+
+    private static void CreationalDesignPatterns()
+    {
+        // Singleton
+        Section("Singleton", () =>
+        {
+            Console.WriteLine(MySingleton.GetInstance().GetGreetings());
+        });
+        
+        // Factory
+        Section("Factory", () =>
+        {
+            CarFactory factory = new CarFactory();
+            Console.WriteLine($"Race car: {factory.GetCar(CarType.Racing, "red", 400).GetDescription()}," +
+                              $"\nCity car: {factory.GetCar(CarType.City, "white", 80).GetDescription()}");
+        });
+        
+        // Abstract Factory
+        Section("Abstract Factory", () =>
+        {
+            SuperBurgerFactory superBurgerFactory = new SuperBurgerFactory();
+            FriedFatFactory friedFatFactory = new FriedFatFactory();
+            superBurgerFactory.GetFried().Cook();
+            superBurgerFactory.GetBurger().Prepare();
+            friedFatFactory.GetBurger().Prepare();
+        });
+        
         // Builder
         Section("Builder", () =>
         {
@@ -27,31 +57,16 @@ class Program
             computerBuilder.Build().PrintComponents();
         });
         
-        // Abstract Factory
-        Section("Abstract Factory", () =>
+        // Prototype
+        Section("Prototype", () =>
         {
-            SuperBurgerFactory superBurgerFactory = new SuperBurgerFactory();
-            FriedFatFactory friedFatFactory = new FriedFatFactory();
-            superBurgerFactory.GetFried().Cook();
-            superBurgerFactory.GetBurger().Prepare();
-            friedFatFactory.GetBurger().Prepare();
-        });
-        
-        // Factory
-        Section("Factory", () =>
-        {
-            CarFactory factory = new CarFactory();
-            Console.WriteLine($"Race car: {factory.GetCar(CarType.Racing, "red", 400).GetDescription()}," +
-                              $"\nCity car: {factory.GetCar(CarType.City, "white", 80).GetDescription()}");
-        });
-        
-        // Singleton
-        Section("Singleton", () =>
-        {
-            Console.WriteLine(MySingleton.GetInstance().GetGreetings());
+            Book myBook = new Book("Lope", 123, "Al");
+            Book? clonedBook = myBook.Clone() as Book;
+            Console.WriteLine("Author: " + clonedBook.GetAuthor());
         });
     }
-
+        
+    
     private static void Section(string sectionName, Action action)
     {
         Console.WriteLine("*** Starting " + sectionName + " ***");
